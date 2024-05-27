@@ -4,7 +4,8 @@
   "main": "build/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "npm run build && node index.js"
+    "clean": "rimraf build && rimraf output && mkdir output",
+    "start": "pnpm clean && pnpm build && node build/index.js"
   },
   "keywords": [],
   "author": "",
@@ -12,11 +13,13 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^20.12.12",
+    "rimraf": "^5.0.7",
     "typescript": "^5.4.5"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
     "csv-writer": "^1.6.0",
+    "dotenv": "^16.4.5",
     "fs": "^0.0.1-security",
     "node-html-parser": "^6.1.13"
   }

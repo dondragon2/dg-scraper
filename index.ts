@@ -1,6 +1,8 @@
 import * as cheerio from 'cheerio';
 import { createObjectCsvWriter } from 'csv-writer';
+import * as dotenv from 'dotenv';
 
+dotenv.config();
 
 const fetchToken = async (url: string): Promise<{ cookies: string | null; token: string }> => {
     try {
@@ -132,7 +134,12 @@ const saveToCSV = async (data: any[], filePath: string) => {
 };
 
 (async () => {
-    const url = 'https://gels-avoirs.dgtresor.gouv.fr/List';
+    const url = process.env.BASE_URL;
+    if (!url) {
+        console.error('BASE_URL is required. check that variable is set in .env file.\nIf file is missing, create one and add BASE_URL=https://example.com\n');
+        return;
+    }
+
     const tokenData = await fetchToken(url);
 
     if (tokenData) {

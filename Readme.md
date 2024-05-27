@@ -22,8 +22,8 @@ This README file will guide you through the process of installing `pnpm` on Wind
 1. Clone your Node.js project repository or navigate to your project directory:
 
    ```sh
-   git clone <your-repo-url>
-   cd <your-project-directory>
+   git clone https://github.com/dondragon2/dg-scraper.git
+   cd dg-scraper
    ```
 
 2. Install the project dependencies using `pnpm`:
@@ -37,29 +37,3 @@ This README file will guide you through the process of installing `pnpm` on Wind
    ```sh
    pnpm start
    ```
-
-### Additional Commands
-
-- To add a new package to your project, use:
-
-  ```sh
-  pnpm add <package-name>
-  ```
-
-- To remove a package from your project, use:
-
-  ```sh
-  pnpm remove <package-name>
-  ```
-
-- To run a script defined in your `package.json`, use:
-
-  ```sh
-  pnpm run <script-name>
-  ```
-
-### Conclusion
-
-You've now installed `pnpm`, set up your Node.js project, and learned how to run it. If you encounter any issues or need further assistance, refer to the [pnpm documentation](https://pnpm.io/).
-
-Happy coding!
