@@ -78,39 +78,39 @@ const fetchAndParse = async (url: string, formData: any, cookies: string | null,
             const columns = $(row).find('td');
             const rowData: any = {};
 
-            rowData.id = $(columns[0]).text().trim();
-            rowData.regime = $(columns[1]).text().trim();
-            rowData.typeDeNature = $(columns[2]).text().trim();
-            rowData.nom = $(columns[3]).text().trim();
-            rowData.prenom = $(columns[4]).text().trim();
-            rowData.alias = $(columns[5]).text().trim();
-            rowData.dateDeNaissance = $(columns[6]).text().trim();
-            rowData.lieuDeNaissance = $(columns[7]).text().trim();
-            rowData.nationalite = $(columns[8]).text().trim();
-            rowData.titre = $(columns[9]).text().trim();
-            rowData.adresse = $(columns[10]).text().trim();
-            rowData.passeport = $(columns[11]).text().trim();
-            rowData.identification = $(columns[12]).text().trim();
-            rowData.fondementJuridique = $(columns[13]).text().trim();
-            rowData.motifs = $(columns[14]).text().trim();
+            rowData.id = $(columns[0]).text().trim().replace(/\\n/g, ' ');
+            rowData.regime = $(columns[1]).text().trim().replace(/\\n/g, ' ');
+            rowData.typeDeNature = $(columns[2]).text().trim().replace(/\\n/g, ' ');
+            rowData.nom = $(columns[3]).text().trim().replace(/\\n/g, ' ');
+            rowData.prenom = $(columns[4]).text().trim().replace(/\\n/g, ' ');
+            rowData.alias = $(columns[5]).text().trim().replace(/\\n/g, ' ');
+            rowData.dateDeNaissance = $(columns[6]).text().trim().replace(/\\n/g, ' ');
+            rowData.lieuDeNaissance = $(columns[7]).text().trim().replace(/\\n/g, ' ');
+            rowData.nationalite = $(columns[8]).text().trim().replace(/\\n/g, ' ');
+            rowData.titre = $(columns[9]).text().trim().replace(/\\n/g, ' ');
+            rowData.adresse = $(columns[10]).text().trim().replace(/\\n/g, ' ');
+            rowData.passeport = $(columns[11]).text().trim().replace(/\\n/g, ' ');
+            rowData.identification = $(columns[12]).text().trim().replace(/\\n/g, ' ');
+            rowData.fondementJuridique = $(columns[13]).text().trim().replace(/\\n/g, ' ');
+            rowData.motifs = $(columns[14]).text().trim().replace(/\\n/g, ' ');
 
             data.push(rowData);
         });
 
-
-        const filePath = `output/page_${page}.csv`;
-        await saveToCSV(data, filePath);
-        console.log(`Data saved to ${filePath}`);
+        await saveToCSV(data, page);
+        console.log(`Data saved page: ${page}`);
     } catch (e) {
         console.error('Error fetching and parsing:', e);
         throw e;
     }
 };
 
-const saveToCSV = async (data: any[], filePath: string) => {
+const saveToCSV = async (data: any[], page: number) => {
+    const filePath = process.env.OUTPUT_FILE_PATH ?? `output/data.csv`;
     const csvWriter = createObjectCsvWriter({
         path: filePath,
         encoding: 'utf8',
+        append: page > 1,
         header: [
             {id: 'id', title: 'Id'},
             {id: 'regime', title: 'Régime'},
