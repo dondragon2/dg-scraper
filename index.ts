@@ -162,5 +162,6 @@ const saveToCSV = async (data: any[], page: number) => {
         }
 
         await Promise.all(results);
+        console.log('process completed');
     }
 })();
